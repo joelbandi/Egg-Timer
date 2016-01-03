@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textview;
     SeekBar seekbar;
     CountDownTimer count;
-    MediaPlayer mplayer = MediaPlayer.create(getApplicationContext(),R.raw.ping);
+    MediaPlayer mplayer;
     boolean active = false;
 
 
@@ -36,9 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void resettimer(){
         button.setText("Go!");
+        count.cancel();
         seekbar.setProgress(30);
+        count.cancel();
         seekbar.setVisibility(VISIBLE);
         updatetimer(seekbar.getProgress());
+        active = false;
     }
 
 
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
+                    mplayer = MediaPlayer.create(getApplicationContext(), R.raw.ping);
                     mplayer.start();
                     resettimer();
                 }
